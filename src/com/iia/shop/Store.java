@@ -22,6 +22,27 @@ public class Store {
 	private static Scanner sc;
 
 	public static void main(String[] args) {
+		
+		// fichier
+
+		File dir = new File("C:\\Users\\avigie\\workspace");
+
+		// pour lire un fichier ou un dossier sur le PC
+		File file = new File(dir, "voiture.txt");
+		readFile(file);
+
+		// pour creer un fichier et ecrire dedans
+		File newFile = new File("C:\\Users\\avigie\\workspace\\Voitures.txt");
+		//createFile(newFile, "test");
+
+		// Sérialisation d'un objet dans un fichier
+		File serialFile = new File("C:\\Users\\avigie\\workspace\\voiture.txt");
+		Vehicule vehicule1 = new Vehicule();
+		Store.saveObject(serialFile, vehicule1);
+		
+		// Désérialisation d'un objet venant d'un fichier
+		Store.readObject(serialFile); // lit le fichier binaire
+		
 		Store.vehicules = new ArrayList<Vehicule>();
 
 		assets();
@@ -45,7 +66,20 @@ public class Store {
 			vehicule = new Vehicule();
 
 			setVehicule(vehicule);
-			create(vehicule);
+			createFile(newFile, "Voiture");
+			createFile(newFile, "Marque : " + vehicule.getMarque());
+			System.out.println(" ");
+			createFile(newFile, "Modèle : " + vehicule.getModel());
+			System.out.println(" ");
+			createFile(newFile, "Couleur : " + vehicule.getColor());
+			System.out.println(" ");
+			createFile(newFile, "Année : " + Integer.toString(vehicule.getYear()));
+			System.out.println(" ");
+			createFile(newFile, "Prix : " + Double.toString(vehicule.getPrice()));
+			System.out.println(" ");
+			createFile(newFile, " ");
+			
+			//create(vehicule);
 			break;
 		case 2:
 			System.out.println("Veuillez saisir l'id du véhicule");
@@ -77,28 +111,6 @@ public class Store {
 		default:
 			break;
 		}
-
-		// fichier
-
-		File dir = new File("C:\\Users\\Aurianne\\workspace");
-
-		// pour lire un fichier ou un dossier sur le PC
-		File file = new File(dir, "Voitures.txt");
-		readFile(file);
-
-		// pour creer un fichier et ecrire dedans
-		File newFile = new File("C:\\Users\\Aurianne\\Voitures.txt");
-		createFile(newFile, "ici mon texte que je veux enregistrer");
-
-		// Sérialisation d'un objet dans un fichier
-		File serialFile = new File("C:\\Users\\Aurianne\\voitures.txt");
-		Vehicule vehicule1 = new Vehicule();
-		vehicule1.setMarque("Alfa");
-		vehicule1.setSpeed(150);
-		Store.saveObject(serialFile, vehicule1);
-		
-		// Désérialisation d'un objet venant d'un fichier
-		//Store.readObject(serialFile); // lit le fichier binaire
 	}
 
 	private static void create(Vehicule vehicule) {
@@ -179,13 +191,13 @@ public class Store {
 			// FileWriter writer = new FileWriter(file, true);
 			// si on met un boolean a true il faut faire une newLine sinon il
 			// met le texte a la suite
-			FileWriter writer = new FileWriter(file);
+			FileWriter writer = new FileWriter(file, true);
 
 			BufferedWriter buffer = new BufferedWriter(writer);
 
 			buffer.write(value); // ecrit le texte du createFile
 			buffer.newLine(); // pour ecrire sur une deuxieme ligne
-			buffer.write(value);
+			//buffer.write(value);
 
 			buffer.close(); // on ferme le buffer
 
@@ -215,7 +227,7 @@ public class Store {
 		}
 	}
 
-	/*public static void readObject(File file) {
+	public static void readObject(File file) {
 		try {
 			FileInputStream in = new FileInputStream(file);
 			ObjectInputStream objectIn = new ObjectInputStream(in);
@@ -224,9 +236,13 @@ public class Store {
 
 			objectIn.close();
 
-			System.out.println("Marque de la voiture : " + Vehicule.getMarque());
-			System.out.println("Vitesse de la voiture : " + Vehicule.getSpeed());
-
+			System.out.println("Marque : " + vehicule.getMarque());
+			System.out.println("Modèle : " + vehicule.getModel());
+			System.out.println("Couleur : " + vehicule.getColor());
+			System.out.println("Année : " + vehicule.getYear());
+			System.out.println("Vitesse : " + vehicule.getSpeed());
+			System.out.println("Prix : " + vehicule.getPrice());
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -237,5 +253,5 @@ public class Store {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
