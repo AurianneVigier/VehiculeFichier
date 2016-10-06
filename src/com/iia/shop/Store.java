@@ -25,23 +25,23 @@ public class Store {
 		
 		// fichier
 
-		File dir = new File("C:\\Users\\avigie\\workspace");
+		File dir = new File(".");
 
 		// pour lire un fichier ou un dossier sur le PC
-		File file = new File(dir, "voiture.txt");
+		File file = new File(dir, "Voitures.txt");
 		readFile(file);
 
 		// pour creer un fichier et ecrire dedans
-		File newFile = new File("C:\\Users\\avigie\\workspace\\Voitures.txt");
+		File newFile = new File(".\\Voitures.txt");
 		//createFile(newFile, "test");
 
 		// Sérialisation d'un objet dans un fichier
-		File serialFile = new File("C:\\Users\\avigie\\workspace\\voiture.txt");
-		Vehicule vehicule1 = new Vehicule();
-		Store.saveObject(serialFile, vehicule1);
+		//File serialFile = new File(".\\Voitures.txt");
+		//Vehicule vehicule1 = new Vehicule();
+		//Store.saveObject(serialFile, vehicule1);
 		
 		// Désérialisation d'un objet venant d'un fichier
-		Store.readObject(serialFile); // lit le fichier binaire
+		//Store.readObject(serialFile); // lit le fichier binaire
 		
 		Store.vehicules = new ArrayList<Vehicule>();
 
@@ -84,7 +84,7 @@ public class Store {
 		case 2:
 			System.out.println("Veuillez saisir l'id du véhicule");
 			vehicule = read(Store.sc.nextInt());
-
+			
 			displayVehicule(vehicule);
 			setVehicule(vehicule);
 			break;
